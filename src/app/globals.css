@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+/*
+ * SEEGAS design tokens. Blue is sampled from the logo (#0563F7 → #0866F5) and is reserved for
+ * actions and the brand mark; structure comes from navy, ink and hairlines, not from colour.
+ * One type family (Archivo) on two widths: expanded for display, normal for reading.
+ */
+@theme {
+  --color-brand: #0866f5;
+  --color-brand-strong: #0552c9;
+  --color-brand-tint: #e9f1fe;
+  --color-navy: #0c1d31;
+  --color-navy-line: #22374f;
+  --color-navy-muted: #9fb0c4;
+  --color-ink: #111820;
+  --color-ink-2: #3a4553;
+  --color-muted: #5c6878;
+  --color-paper: #f4f6f9;
+  --color-line: #d7dfe8;
+  --color-line-strong: #b9c5d3;
+  --color-ok: #127a45;
+  --color-warn: #8a5a00;
+  --color-warn-tint: #fdf4e1;
+  --color-danger: #b42318;
+  --color-danger-tint: #fdeceb;
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: 3px;
+  --radius-md: 6px;
+
+  --container-site: 77.5rem;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 5.5rem;
+  }
+  body {
+    background: var(--color-white, #fff);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    font-feature-settings: "ss01" on;
+  }
+  ::selection {
+    background: var(--color-brand);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-site {
+    width: 100%;
+    max-width: var(--container-site);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 48rem) {
+    .container-site {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Display type: the expanded cut does the brand's talking, so colour doesn't have to. */
+  .t-display {
+    font-stretch: 118%;
+    font-weight: 780;
+    letter-spacing: -0.025em;
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+  .t-h2 {
+    font-stretch: 112%;
+    font-weight: 720;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+  .t-h3 {
+    font-stretch: 106%;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .t-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-stretch: 108%;
+  }
+  .t-lead {
+    font-size: 1.125rem;
+    line-height: 1.55;
+    color: var(--color-ink-2);
+    text-wrap: pretty;
+  }
+  .t-num {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    min-height: 3rem;
+    padding: 0 1.375rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-stretch: 106%;
+    letter-spacing: -0.005em;
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    transition:
+      background-color 150ms ease,
+      border-color 150ms ease,
+      color 150ms ease;
+  }
+  .btn-primary {
+    background: var(--color-brand);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: var(--color-brand-strong);
+  }
+  .btn-secondary {
+    border-color: var(--color-line-strong);
+    background: #fff;
+    color: var(--color-ink);
+  }
+  .btn-secondary:hover {
+    border-color: var(--color-ink);
+  }
+  .btn-on-dark {
+    border-color: var(--color-navy-line);
+    background: transparent;
+    color: #fff;
+  }
+  .btn-on-dark:hover {
+    border-color: #fff;
+  }
+  .btn-sm {
+    min-height: 2.5rem;
+    padding: 0 1rem;
+    font-size: 0.9375rem;
+  }
+
+  .link {
+    color: var(--color-brand-strong);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+  .link:hover {
+    text-decoration-thickness: 2px;
+  }
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-ink);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-line-strong);
+    padding-bottom: 0.125rem;
+  }
+  .link-arrow:hover {
+    border-color: var(--color-ink);
+  }
+
+  .prose-safety h3 {
+    margin-top: 0;
+  }
+  .prose-safety li + li {
+    margin-top: 0.75rem;
+  }
+}
