@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Clock, Phone, Pin, WhatsApp } from "@/components/icons";
-import { PhotoSlot } from "@/components/PhotoSlot";
+import { Photo } from "@/components/Photo";
 import { HeadlinePrice, PriceTable } from "@/components/Prices";
 import { site } from "@/config/site";
 import { directionsUrl, outlets } from "@/content/outlets";
+import { photos } from "@/content/photos";
 import { whatsappLink, type WhatsappIntent } from "@/lib/whatsapp";
 
 const SERVICES: { name: string; detail: string; intent: WhatsappIntent; action: string }[] = [
@@ -20,10 +21,9 @@ export default function Home() {
     <>
       {/* ── hero ─────────────────────────────────────────────────────── */}
       <section className="border-b border-line">
-        <div className="container-site grid gap-10 py-12 md:py-16 lg:grid-cols-12 lg:gap-12 lg:py-24">
-          <div className="lg:col-span-7 lg:pr-6">
-            <p className="t-label text-brand-strong">Cooking gas · Abuja</p>
-            <h1 className="t-display mt-5 text-[2.75rem] sm:text-6xl lg:text-[5.25rem]">Cooking gas, refilled and delivered.</h1>
+        <div className="container-site grid gap-10 py-10 md:py-16 lg:grid-cols-12 lg:items-end lg:gap-12 lg:py-20">
+          <div className="lg:col-span-7 lg:pb-2">
+            <h1 className="t-display text-[2.75rem] sm:text-6xl lg:text-[5.25rem]">Cooking gas, refilled and delivered.</h1>
             <p className="t-lead mt-6 max-w-xl">
               Refill at our station in Utako, or order on WhatsApp and we&apos;ll bring it to you. For homes, restaurants and commercial kitchens across Abuja.
             </p>
@@ -36,44 +36,43 @@ export default function Home() {
                 View gas prices
               </Link>
             </div>
+
+            <div className="mt-12 grid gap-8 sm:grid-cols-2">
+              <dl className="grid content-start gap-3 border-t border-line pt-5 text-[0.9375rem]">
+                <div className="flex gap-3">
+                  <dt className="mt-0.5 text-muted">
+                    <Pin size={18} />
+                    <span className="sr-only">Address</span>
+                  </dt>
+                  <dd>
+                    <a href={directionsUrl(outlet)} target="_blank" rel="noopener" className="hover:underline">
+                      {outlet.address}
+                    </a>
+                    {outlet.landmark ? <span className="block text-muted">{outlet.landmark}</span> : null}
+                  </dd>
+                </div>
+                <div className="flex gap-3">
+                  <dt className="mt-0.5 text-muted">
+                    <Phone size={18} />
+                    <span className="sr-only">Phone</span>
+                  </dt>
+                  <dd className="t-num">
+                    {site.phones.map((p, i) => (
+                      <span key={p.tel}>
+                        {i > 0 ? <span className="text-muted"> · </span> : null}
+                        <a href={`tel:${p.tel}`} className="underline decoration-line-strong underline-offset-4 hover:decoration-ink">
+                          {p.display}
+                        </a>
+                      </span>
+                    ))}
+                  </dd>
+                </div>
+              </dl>
+              <HeadlinePrice />
+            </div>
           </div>
 
-          <aside aria-label="Refill point" className="flex flex-col self-start rounded-sm bg-navy p-7 text-white md:p-9 lg:col-span-5">
-            <HeadlinePrice />
-            <div className="my-7 h-px bg-navy-line" />
-            <dl className="grid gap-5 text-[0.9375rem]">
-              <div className="flex gap-3">
-                <dt className="mt-0.5 text-navy-muted">
-                  <Pin size={18} />
-                  <span className="sr-only">Address</span>
-                </dt>
-                <dd>
-                  {outlet.address}
-                  {outlet.landmark ? <span className="block text-navy-muted">{outlet.landmark}</span> : null}
-                </dd>
-              </div>
-              <div className="flex gap-3">
-                <dt className="mt-0.5 text-navy-muted">
-                  <Phone size={18} />
-                  <span className="sr-only">Phone</span>
-                </dt>
-                <dd className="t-num">
-                  {site.phones.map((p, i) => (
-                    <span key={p.tel}>
-                      {i > 0 ? <span className="text-navy-muted"> · </span> : null}
-                      <a href={`tel:${p.tel}`} className="underline decoration-navy-line underline-offset-4 hover:decoration-white">
-                        {p.display}
-                      </a>
-                    </span>
-                  ))}
-                </dd>
-              </div>
-            </dl>
-            <a href={directionsUrl(outlet)} target="_blank" rel="noopener" className="btn btn-on-dark mt-8 w-full">
-              Get directions
-              <ArrowUpRight size={18} />
-            </a>
-          </aside>
+          <Photo photo={photos.refillPoint} preload sizes="(min-width: 1024px) 34vw, 100vw" className="lg:col-span-5" />
         </div>
       </section>
 
@@ -87,6 +86,7 @@ export default function Home() {
             <p className="mt-5 max-w-sm text-ink-2">
               SEEGAS supplies LPG to households and businesses in Abuja. Everything below can be arranged with one WhatsApp message.
             </p>
+            <Photo photo={photos.salesDesk} sizes="(min-width: 1024px) 26vw, 0px" className="mt-10 hidden max-w-sm lg:block" />
           </div>
           <ul className="border-t border-ink lg:col-span-8">
             {SERVICES.map((s) => (
@@ -127,7 +127,7 @@ export default function Home() {
       {/* ── visit ────────────────────────────────────────────────────── */}
       <section aria-labelledby="visit" className="py-20 md:py-28">
         <div className="container-site grid items-center gap-12 lg:grid-cols-12">
-          <PhotoSlot subject="The SEEGAS refill point at NNPC Utako" ratio="5 / 4" className="lg:col-span-6" />
+          <Photo photo={photos.attendant} className="max-w-md lg:col-span-5" />
           <div className="lg:col-span-5 lg:col-start-8">
             <p className="t-label text-muted">Refill point</p>
             <h2 id="visit" className="t-h2 mt-4 text-3xl md:text-[2.75rem]">

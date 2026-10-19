@@ -35,7 +35,7 @@ export function SiteHeader() {
       </a>
       <div className="container-site flex h-16 items-center gap-6 md:h-[4.5rem]">
         <Link href="/" className="shrink-0" aria-label="SEEGAS home">
-          <Image src="/brand/seegas-lockup.png" alt="SEEGAS" width={1080} height={338} priority className="h-8 w-auto md:h-9" />
+          <Image src="/brand/seegas-lockup.png" alt="SEEGAS" width={1080} height={338} preload className="h-8 w-auto md:h-9" />
         </Link>
 
         <nav aria-label="Main" className="ml-auto hidden lg:block">

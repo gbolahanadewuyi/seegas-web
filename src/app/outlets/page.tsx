@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowUpRight, Clock, Phone, Pin, WhatsApp } from "@/components/icons";
 import { PageIntro } from "@/components/PageIntro";
-import { PhotoSlot } from "@/components/PhotoSlot";
+import { Photo } from "@/components/Photo";
 import { directionsUrl, outlets, SERVICE_LABEL } from "@/content/outlets";
 import { whatsappLink } from "@/lib/whatsapp";
 
@@ -24,7 +24,7 @@ export default function OutletsPage() {
         <ul className="grid gap-16">
           {outlets.map((outlet) => (
             <li key={outlet.slug} id={outlet.slug} className="grid gap-10 lg:grid-cols-12">
-              <PhotoSlot subject={`${outlet.name}, ${outlet.area}`} ratio="4 / 3" className="lg:col-span-5" />
+              {outlet.photo ? <Photo photo={outlet.photo} className="max-w-md lg:col-span-5" /> : null}
 
               <article className="lg:col-span-7 lg:pl-6" aria-labelledby={`${outlet.slug}-name`}>
                 <p className="t-label text-muted">

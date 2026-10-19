@@ -5,6 +5,7 @@
  *
  * Only add facts SEEGAS has confirmed. Unknown fields stay null and the UI says "call to confirm".
  */
+import { photos, type Photo } from "./photos";
 
 export type OutletService = "refill" | "cylinders" | "delivery" | "installation";
 
@@ -22,6 +23,8 @@ export interface Outlet {
   services: OutletService[];
   /** Free-text Google Maps query; replace with a place ID or coordinates once verified on site. */
   mapsQuery: string;
+  /** SEEGAS's own photo of this outlet; null shows no image rather than a stand-in. */
+  photo: Photo | null;
 }
 
 export const SERVICE_LABEL: Record<OutletService, string> = {
@@ -46,6 +49,7 @@ export const outlets: Outlet[] = [
     hours: null,
     services: ["refill", "cylinders", "delivery", "installation"],
     mapsQuery: "NNPC Filling Station Utako Abuja",
+    photo: photos.forecourt,
   },
 ];
 

@@ -33,27 +33,23 @@ export function PricesUnavailable({ tone = "light" }: { tone?: "light" | "dark" 
   );
 }
 
-/** Compact "headline" price used in the home hero panel. */
+/**
+ * Today's per-kg refill price for the home hero. Renders nothing without a live price: the hero's
+ * CTAs and the prices section already cover the "ask us" route, so repeating it here is noise.
+ */
 export async function HeadlinePrice() {
   const list = await getPriceList();
   const lpg = lpgPerKg(list);
-  if (list.status !== "ok" || !lpg) {
-    return (
-      <div>
-        <p className="t-label text-navy-muted">Today&apos;s refill price</p>
-        <p className="mt-3 text-lg leading-snug">Ask us on WhatsApp for today&apos;s price per kg.</p>
-      </div>
-    );
-  }
+  if (list.status !== "ok" || !lpg) return null;
   return (
-    <div>
-      <p className="t-label text-navy-muted">Today&apos;s refill price</p>
+    <div className="border-t border-line pt-5">
+      <p className="t-label text-muted">Today&apos;s refill price</p>
       <p className="mt-2 flex items-baseline gap-2">
-        <span className="t-display t-num text-5xl md:text-6xl">{formatNaira(lpg.price)}</span>
-        <span className="text-navy-muted">per kg</span>
+        <span className="t-h2 t-num text-4xl">{formatNaira(lpg.price)}</span>
+        <span className="text-muted">per kg</span>
       </p>
-      <div className="mt-3">
-        <Updated list={list} tone="dark" />
+      <div className="mt-2">
+        <Updated list={list} />
       </div>
     </div>
   );
