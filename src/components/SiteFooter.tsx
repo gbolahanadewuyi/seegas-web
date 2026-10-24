@@ -20,7 +20,7 @@ export function SiteFooter() {
         <div className="md:col-span-4">
           <Image src="/brand/seegas-lockup-white.png" alt="SEEGAS" width={1080} height={338} className="h-11 w-auto" />
           <p className="mt-6 max-w-xs text-[0.9375rem] leading-relaxed text-navy-muted">
-            Cooking gas refills, cylinders and delivery for homes and businesses in Abuja.
+            Cooking gas, cylinders and accessories for homes and businesses in Abuja.
           </p>
         </div>
 

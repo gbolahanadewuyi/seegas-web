@@ -16,7 +16,7 @@ export default function PricesPage() {
       <PageIntro
         label="Gas prices"
         title="Today's gas prices"
-        lead="Prices on this page come straight from the system we use to price every order, so they change when our prices change."
+        lead="Cooking gas sold by the kilogram. Check the current rate and refill costs for your cylinder."
       />
       <div className="container-site grid gap-14 py-14 md:py-20 lg:grid-cols-12">
         <div className="lg:col-span-8">

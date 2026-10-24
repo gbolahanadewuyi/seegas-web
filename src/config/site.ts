@@ -7,14 +7,15 @@
 const digits = (value: string) => value.replace(/\D/g, "");
 
 /** International format without "+", as wa.me expects. Must be the Fillo-connected business number. */
-const whatsappNumber = digits(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "2348081829329");
+const configuredWhatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+const whatsappNumber = configuredWhatsappNumber ? digits(configuredWhatsappNumber) : null;
 
 export const site = {
   name: "SEEGAS",
   legalName: "SEEGAS",
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.seegas.com.ng").replace(/\/$/, ""),
   description:
-    "Cooking gas (LPG) refills, cylinder sales and delivery in Abuja, for homes, restaurants and commercial kitchens. Order on WhatsApp or visit our refill point at NNPC Utako.",
+    "Cooking gas (LPG), cylinders and gas accessories in Abuja, for homes and businesses. Order a refill or delivery, or visit SEEGAS at NNPC Utako.",
   city: "Abuja",
   whatsappNumber,
   phones: [
@@ -30,6 +31,7 @@ export const site = {
 /** "0808 182 9329" — Nigerian local format for display next to WhatsApp buttons. */
 export function displayWhatsappNumber(): string {
   const n = site.whatsappNumber;
+  if (!n) return "Not yet published";
   const local = n.startsWith("234") ? `0${n.slice(3)}` : n;
   return local.replace(/^(\d{4})(\d{3})(\d+)$/, "$1 $2 $3");
 }

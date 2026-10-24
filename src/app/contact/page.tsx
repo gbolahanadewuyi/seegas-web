@@ -31,13 +31,12 @@ export default function ContactPage() {
       <div className="container-site py-6 md:py-10">
         <div className="border-t border-ink">
           <Row label="WhatsApp">
-            <p className="t-h3 text-2xl md:text-3xl">
-              <CopyNumber value={`+${site.whatsappNumber}`} display={displayWhatsappNumber()} />
-            </p>
-            <a href={whatsappLink("general")} target="_blank" rel="noopener" className="btn btn-primary mt-5">
-              <WhatsApp size={18} />
-              Message us
-            </a>
+            {site.whatsappNumber ? (
+              <>
+                <p className="t-h3 text-2xl md:text-3xl"><CopyNumber value={`+${site.whatsappNumber}`} display={displayWhatsappNumber()} /></p>
+                <a href={whatsappLink("general")} target="_blank" rel="noopener" className="btn btn-primary mt-5"><WhatsApp size={18} />Message us</a>
+              </>
+            ) : <p className="text-lg text-ink-2">WhatsApp details are being confirmed. Please call us using the numbers below.</p>}
           </Row>
 
           <Row label="Phone">

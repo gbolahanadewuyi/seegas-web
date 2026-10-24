@@ -1,4 +1,5 @@
 import { whatsappLink } from "@/lib/whatsapp";
+import { site } from "@/config/site";
 import { WhatsApp } from "./icons";
 
 /**
@@ -7,6 +8,7 @@ import { WhatsApp } from "./icons";
  * home indicator, and the footer reserves matching space so it never hides the last line.
  */
 export function WhatsAppButton() {
+  if (!site.whatsappNumber) return null;
   return (
     <a
       href={whatsappLink("refill")}

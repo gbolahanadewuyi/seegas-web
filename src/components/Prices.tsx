@@ -21,13 +21,13 @@ export function PricesUnavailable({ tone = "light" }: { tone?: "light" | "dark" 
   const dark = tone === "dark";
   return (
     <div className={`rounded-sm border p-6 md:p-8 ${dark ? "border-navy-line" : "border-line bg-paper"}`}>
-      <p className="t-h3 text-xl">Today&apos;s prices aren&apos;t showing right now</p>
+      <p className="t-h3 text-xl">Ask for today&apos;s price</p>
       <p className={`mt-2 max-w-prose ${dark ? "text-navy-muted" : "text-ink-2"}`}>
-        Gas prices change often, and we only show a price when it comes straight from our pricing system. Send us a message and we&apos;ll tell you today&apos;s price per kg.
+        Message us for the current price per kg and your refill total.
       </p>
-      <a href={whatsappLink("price")} target="_blank" rel="noopener" className={`btn mt-6 ${dark ? "btn-on-dark" : "btn-secondary"}`}>
+      <a href={whatsappLink("price")} target="_blank" rel="noopener" className={`btn mt-6 max-w-full whitespace-normal py-3 text-center ${dark ? "btn-on-dark" : "btn-secondary"}`}>
         <WhatsApp size={18} />
-        Ask for today&apos;s price
+        Check price on WhatsApp
       </a>
     </div>
   );

@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 const OTHER: { intent: WhatsappIntent; label: string }[] = [
   { intent: "delivery", label: "Have a refill delivered" },
   { intent: "cylinder", label: "Buy a new cylinder" },
+  { intent: "accessories", label: "Buy gas accessories" },
   { intent: "business", label: "Regular supply for a business" },
   { intent: "installation", label: "Installation, maintenance or repair" },
 ];
@@ -22,7 +23,6 @@ const OTHER: { intent: WhatsappIntent; label: string }[] = [
 export default function OrderPage() {
   const outlet = outlets[0]!;
   const steps = [
-    { title: "Send us a message", body: "Tap the button. WhatsApp opens with a message already written, so you only need to press send." },
     { title: "Tell us what you need", body: "Your cylinder size or how much gas you want, and whether you'll collect it or need it delivered." },
     { title: "We confirm the details", body: "We reply in the chat with the price and when your gas will be ready or delivered." },
     { title: "Collect or receive", body: `Pick up at ${outlet.address.split(",")[0]}, or we bring it to the address you gave us.` },
@@ -32,14 +32,14 @@ export default function OrderPage() {
     <>
       <PageIntro
         label="Order a refill"
-        title="Order your refill on WhatsApp"
-        lead="One message is all it takes. We confirm the amount, the price and the collection or delivery details with you in the chat."
+        title="Order a gas refill"
+        lead="Collect at NNPC Utako or arrange delivery in Abuja. Call or message us with your cylinder size and the quantity you need."
       />
 
       <div className="container-site grid gap-14 py-14 md:py-20 lg:grid-cols-12">
         <section aria-labelledby="how" className="lg:col-span-7">
           <h2 id="how" className="t-h2 text-2xl md:text-3xl">
-            How it works
+            Your refill
           </h2>
           <ol className="mt-8 border-t border-ink">
             {steps.map((step, i) => (
@@ -58,18 +58,11 @@ export default function OrderPage() {
 
         <aside aria-label="Start your order" className="lg:col-span-5 lg:col-start-8">
           <div className="rounded-sm border border-line p-6 md:p-8 lg:sticky lg:top-28">
-            <a href={whatsappLink("refill")} target="_blank" rel="noopener" className="btn btn-primary w-full text-lg">
-              <WhatsApp size={20} />
-              Order a refill on WhatsApp
-            </a>
-            <p className="mt-3 text-center text-sm text-muted">Opens WhatsApp with your message ready to send.</p>
+            {site.whatsappNumber ? <a href={whatsappLink("refill")} target="_blank" rel="noopener" className="btn btn-primary w-full text-lg"><WhatsApp size={20} />Order a refill on WhatsApp</a> : <p className="border border-line bg-paper p-4 text-ink-2">WhatsApp ordering is being set up. Call SEEGAS to arrange your refill.</p>}
 
             <div className="mt-8 border-t border-line pt-6">
               <p className="text-sm text-muted">Our WhatsApp number</p>
-              <p className="mt-1 text-lg">
-                <CopyNumber value={`+${site.whatsappNumber}`} display={displayWhatsappNumber()} />
-              </p>
-              <p className="mt-3 text-sm text-muted">On a computer, the button opens WhatsApp Web or the desktop app. You can also save the number and message us from your phone.</p>
+              <p className="mt-1 text-lg">{site.whatsappNumber ? <CopyNumber value={`+${site.whatsappNumber}`} display={displayWhatsappNumber()} /> : "Not yet published"}</p>
             </div>
 
             <div className="mt-8 border-t border-line pt-6">

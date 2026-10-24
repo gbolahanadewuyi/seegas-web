@@ -1,9 +1,7 @@
 @import "tailwindcss";
 
 /*
- * SEEGAS design tokens. Blue is sampled from the logo (#0563F7 → #0866F5) and is reserved for
- * actions and the brand mark; structure comes from navy, ink and hairlines, not from colour.
- * One type family (Archivo) on two widths: expanded for display, normal for reading.
+ * SEEGAS design tokens: blue and navy surfaces, with restrained lime accents.
  */
 @theme {
   --color-brand: #0866f5;
@@ -79,17 +77,17 @@
     }
   }
 
-  /* Display type: the expanded cut does the brand's talking, so colour doesn't have to. */
+  /* Open, rounded display proportions echo the original SEEGAS site. */
   .t-display {
-    font-stretch: 118%;
-    font-weight: 780;
-    letter-spacing: -0.025em;
-    line-height: 0.98;
+    font-stretch: 100%;
+    font-weight: 650;
+    letter-spacing: -0.045em;
+    line-height: 1.06;
     text-wrap: balance;
   }
   .t-h2 {
-    font-stretch: 112%;
-    font-weight: 720;
+    font-stretch: 100%;
+    font-weight: 650;
     letter-spacing: -0.02em;
     line-height: 1.05;
     text-wrap: balance;
@@ -195,5 +193,74 @@
   }
   .prose-safety li + li {
     margin-top: 0.75rem;
+  }
+
+  .retail-hero {
+    display: grid;
+    border-top: 5px solid var(--color-brand);
+  }
+  .retail-hero-copy {
+    padding: 3.5rem 1.25rem;
+  }
+  .cylinder-art {
+    position: relative;
+    min-height: 360px;
+    overflow: hidden;
+    background: var(--color-brand);
+    isolation: isolate;
+  }
+  .cylinder-art::before {
+    content: "";
+    position: absolute;
+    width: 620px;
+    height: 620px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #ffffff40;
+    border-radius: 50%;
+    box-shadow: 0 0 0 65px #ffffff0f, 0 0 0 130px #ffffff0a;
+  }
+  .cylinder-illustration {
+    position: absolute;
+    width: 230px;
+    height: 350px;
+    left: 50%;
+    bottom: -65px;
+    transform: translateX(-50%);
+    border-radius: 65px 65px 30px 30px;
+    background: linear-gradient(100deg, #dce5ef, #fff 46%, #9babbd);
+    box-shadow: 0 35px 70px #02163e59;
+  }
+  .cylinder-illustration::before {
+    content: "";
+    position: absolute;
+    width: 108px;
+    height: 95px;
+    left: 61px;
+    top: -68px;
+    border: 20px solid #e7edf4;
+    border-bottom: 0;
+    border-radius: 25px 25px 0 0;
+  }
+  .cylinder-illustration span {
+    position: absolute;
+    top: 145px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-90deg);
+    color: var(--color-brand-strong);
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+  @media (min-width: 48rem) {
+    .retail-hero-copy { padding: 5rem 2rem; }
+  }
+  @media (min-width: 64rem) {
+    .retail-hero { grid-template-columns: 1.05fr 0.95fr; }
+    .retail-hero-copy { padding: 6rem 3rem 6rem max(2rem, calc((100vw - 77.5rem) / 2 + 2rem)); }
+    .cylinder-illustration { width: 290px; height: 500px; bottom: -55px; }
+    .cylinder-illustration::before { left: 79px; width: 132px; height: 120px; top: -84px; border-width: 26px; }
+    .cylinder-illustration span { top: 205px; font-size: 2.3rem; }
   }
 }
